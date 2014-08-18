@@ -1,4 +1,4 @@
-<%= form_for(@valuation) do |f| %>
+<%= form_for @valuation, url: valuations_path do |f| %>
   <% if @valuation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@valuation.errors.count, "error") %> prohibited this valuation from being saved:</h2>
@@ -18,7 +18,7 @@
 <div class="field">
 
  
-    <%= collection_select :valuation, :part_ids, @parts, :id, :name  %>
+    <%= f.select :part_ids, Part.pluck(:name, :id) %>
 
 </div>
   <div class="field">
