@@ -6,7 +6,7 @@ class ValuationFormObject
   attribute :quantity,          Array
   attribute :part_ids,          Array
 
-  validates :description, :quantity, :part_ids, presence: true
+  validates :description, :part_ids, presence: true
 
   def persisted?; false; end
 
