@@ -23,7 +23,7 @@
     </div>
     <div class="field">
     <%= f.label :quantity %><br>
-    <%= number_field_tag "valuation_form_object[quantity][]", "", name: "quantity", id: "quantity_for_part_id_#{underscore_string(part.name)}", step: '1', disabled: true %>
+    <%= number_field_tag "valuation_form_object[quantity][]", "", id: "quantity_for_part_id_#{underscore_string(part.name)}", step: '1', disabled: true %>
   </div>
   <% end %>
 <div class="field">
