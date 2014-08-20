@@ -17,7 +17,6 @@ class ValuationFormObject
 private
 
   def persist!
-    part_ids.delete_if { |item| item.blank? }
     part_ids.zip(quantity).to_h.map do |k, v|
       valuation.valuation_lines << new_valuation_line(k, v)
     end
