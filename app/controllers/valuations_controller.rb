@@ -14,7 +14,7 @@ class ValuationsController < ApplicationController
 
   # GET /valuations/new
   def new
-    @valuation = Valuation.new
+    @valuation = ValuationFormObject.new
     @parts = Part.all
   end
 
@@ -25,11 +25,11 @@ class ValuationsController < ApplicationController
   # POST /valuations
   # POST /valuations.json
   def create
-    @valuation = Valuation.new(valuation_params)
-
+    @valuation = ValuationFormObject.new(params[:valuation_form_object])
+    
     respond_to do |format|
       if @valuation.save
-        format.html { redirect_to @valuation, notice: 'Valuation was successfully created.' }
+        format.html { redirect_to valuations_path, notice: 'Valuation was successfully created.' }
         format.json { render action: 'show', status: :created, location: @valuation }
       else
         format.html { render action: 'new' }
@@ -70,6 +70,8 @@ class ValuationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def valuation_params
-      params.require(:valuation).permit(:description, :part_id, :valuation_id, :purchase_price, :valuation_line, {:part_ids => []})
+      params.require(:valuation).permit(:description, :part_id, :valuation_id, 
+        :purchase_price, :valuation_line
+      )
     end
 end

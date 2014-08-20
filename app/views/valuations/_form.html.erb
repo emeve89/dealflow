@@ -1,4 +1,5 @@
-<%= form_for(@valuation) do |f| %>
+<%= form_for @valuation, url: valuations_path do |f| %>
+  <%= check_box_tag "valuation_form_object[part_ids][]", "", true, style: "display:none;" %>
   <% if @valuation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@valuation.errors.count, "error") %> prohibited this valuation from being saved:</h2>
@@ -15,16 +16,17 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-<div class="field">
-
- 
-    <%= collection_select :valuation, :part_ids, @parts, :id, :name  %>
-
-</div>
-  <div class="field">
+  <% Part.all.each do |part| %>
+    <br>
+    <div class="field">
+      <%= check_box_tag "valuation_form_object[part_ids][]", part.id, false, id: "part_id_#{underscore_string(part.name)}" %>
+      <%= f.label :part_ids, part.name, for: "valuation_form_object_part_id_#{part.name}" %>
+    </div>
+    <div class="field">
     <%= f.label :quantity %><br>
-    <%= f.text_field :quantity %>
+    <%= number_field_tag "valuation_form_object[quantity][]", "", name: "quantity", id: "quantity_for_part_id_#{underscore_string(part.name)}", step: '1', disabled: true %>
   </div>
+  <% end %>
 <div class="field">
 <br>  
   <div class="actions">
