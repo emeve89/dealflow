@@ -1,5 +1,4 @@
 <%= form_for @valuation, url: valuations_path do |f| %>
-  <%= check_box_tag "valuation_form_object[part_ids][]", "", true, style: "display:none;" %>
   <% if @valuation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@valuation.errors.count, "error") %> prohibited this valuation from being saved:</h2>
